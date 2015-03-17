@@ -1,0 +1,6 @@
+package idao;
+
+public interface ITeamDAO {
+	String getString(String properity);
+	String getInt(String properity);
+}

@@ -1,0 +1,36 @@
+package presentation.panel;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+
+import presentation.common.ImgSys;
+import presentation.common.MyLable;
+import presentation.common.TeamLogo;
+import presentation.common.Transparent_Panel;
+
+/**
+ * 显示球队列表的panel
+ * @author HCW
+ *
+ */
+public class TeamListPanel extends Transparent_Panel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TeamListPanel(int width, int height) {
+		super(width, height);
+		MyLable team = new MyLable("team", new Dimension(50, 50), 50, 50);
+		team.setImg(TeamLogo.ATL);
+		add(team);
+	}
+
+	
+	@Override
+	public void paintComponent(Graphics arg0) {
+		super.paintComponents(arg0);
+		arg0.drawImage(ImgSys.teamList, 0, 0, null);
+	}
+}

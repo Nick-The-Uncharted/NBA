@@ -1,0 +1,24 @@
+package utility;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+public class ConnectionFactory {
+	public static Connection getConnect(String userName, String password , String dbms,
+			String serverName, int portNumber){
+		DataBaseUtility DButi = new DataBaseUtility(userName, password, dbms, serverName, portNumber);
+		
+		try {
+			return DButi.getConnection();
+		} catch (SQLException e) {
+			System.out.println("get Connection failed");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public static Connection getConnect(String userName, String password){
+		return getConnect(userName, password, "derby", "127.0.0.1", 1527);
+	}
+}

@@ -1,0 +1,18 @@
+package dao;
+
+import idao.ITeamDAO;
+
+public class TeamDAO implements ITeamDAO{
+
+	@Override
+	public String getString(String properity) {
+		return null;
+	}
+
+	@Override
+	public String getInt(String properity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
