@@ -1,0 +1,62 @@
+package presentation.panel;
+
+import java.awt.Dimension;
+
+import javax.swing.ImageIcon;
+
+import entity.PlayerVO;
+import presentation.common.Admin;
+import presentation.common.MyLabel;
+import presentation.common.Transparent_Panel;
+import presentation.lable.PlayerDetailLabel;
+
+public class PlayerDetailPanel extends Transparent_Panel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private MyLabel PlayerPhoto;
+	private PlayerDetailLabel name;
+	private PlayerDetailLabel height;
+	private PlayerDetailPanel weight;
+	private PlayerDetailLabel age;
+	private PlayerDetailLabel professionalAge ;
+	private PlayerDetailLabel numberOfPoloShirt;
+	private PlayerDetailLabel location;
+	private PlayerDetailLabel birthday;
+	private PlayerVO tempInfo;
+
+	public PlayerDetailPanel(int width, int height, String name) {
+		super(width, height);
+		PlayerPhoto = new MyLabel(name, new Dimension((int)(50*Admin.proportion),(int)(30*Admin.proportion)), 50, 30);
+		PlayerPhoto.setImg(new ImageIcon(System.getProperty("user.dir")+"/data/players/portrait/"+name+".png"));
+//		this.name = new PlayerDetailLabel("姓名：", new Dimension((int)(100*Admin.proportion),(int)(50*Admin.proportion)), 50, 30);
+//		add(this.name);
+		add(PlayerPhoto);
+		
+	
+	}
+	
+	
+	
+	/*
+	 private BufferedImage image;
+
+	    public ImagePanel() {
+	       try {                
+	          image = ImageIO.read());
+	       } catch (IOException ex) {
+	            // handle exception...
+	       }
+	    }
+
+	    @Override
+	    protected void paintComponent(Graphics g) {
+	        super.paintComponent(g);
+	        g.drawImage(image, 0, 0, null);           
+	    }
+
+*/
+
+}

@@ -1,0 +1,19 @@
+package presentation.common;
+
+import java.awt.Image;
+
+import javax.swing.JComboBox;
+
+public class MyJComboBox extends JComboBox<String>{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@SuppressWarnings("unchecked")
+	public MyJComboBox(Image img) {
+		setRenderer(new CBoxListCellRenderer(img));
+	}
+
+}

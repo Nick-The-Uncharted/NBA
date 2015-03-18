@@ -1,0 +1,42 @@
+package utility;
+
+import java.sql.SQLException;
+
+import javax.sql.rowset.CachedRowSet;
+
+import com.sun.rowset.CachedRowSetImpl;
+
+public class CachedRowSetFactory {
+	public static CachedRowSet getCachedRowSet(String command){
+		CachedRowSet crs = null;
+		try {
+			crs = new CachedRowSetImpl();
+	        crs.setUsername("Nick");
+	        crs.setPassword("19950809");
+	        crs.setUrl("jdbc:derby:" + Config.getInfo("server") + ":" + Config.getInfo("port")+ "/NBA_DB");
+	        crs.setCommand(command);
+	        crs.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+        return crs;
+	}
+	
+	public static CachedRowSet getCachedRowSet(String cols,String tableName){
+		CachedRowSet crs = null;
+		try {
+			crs = new CachedRowSetImpl();
+	        crs.setUsername("Nick");
+	        crs.setPassword("19950809");
+	        crs.setUrl("jdbc:derby://" + Config.getInfo("server") + ":" + Config.getInfo("port")+ "/NBA_DB");
+	        crs.setCommand("select " + cols + " from " + tableName);
+	        crs.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        return crs;
+	}
+}

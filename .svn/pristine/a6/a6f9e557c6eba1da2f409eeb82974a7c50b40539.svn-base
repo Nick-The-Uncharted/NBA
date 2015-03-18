@@ -1,0 +1,61 @@
+package presentation.panel;
+
+import java.awt.Dimension;
+
+import entity.TeamVO;
+import presentation.button.ControlButton;
+import presentation.command.TeamMoreCommand;
+import presentation.common.Admin;
+import presentation.common.ImgSys;
+import presentation.common.MySVG;
+import presentation.common.Transparent_Panel;
+import presentation.lable.TeamDetailLabel;
+
+public class TeamDetailPanel extends Transparent_Panel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private MySVG teamLogo;
+	private TeamDetailLabel name;
+	private TeamDetailLabel abbr;
+	private TeamDetailLabel conference;
+	private TeamDetailLabel division;
+	private TeamDetailLabel homecourt;
+	private TeamDetailLabel foundyear;
+	private TeamDetailLabel location;
+	private TeamVO teamInfo;
+
+	public TeamDetailPanel(int width, int height, String name) {
+		super(width, height);
+		teamLogo = new MySVG(name);
+		teamLogo.setBounds(10, 50, 150, 150);
+		this.name = new TeamDetailLabel("球队全名："+"HFDLK", new Dimension((int) (300*Admin.proportion),(int) (30*Admin.proportion)), 250, 40);
+		this.abbr = new TeamDetailLabel("球队缩写："+"HFDLK", new Dimension((int) (300*Admin.proportion),(int) (30*Admin.proportion)), 250, 90);
+		this.conference = new TeamDetailLabel("赛区："+"HFDLK", new Dimension((int) (300*Admin.proportion),(int) (30*Admin.proportion)), 250, 140);
+		this.homecourt = new TeamDetailLabel("主场："+"HFDLK", new Dimension((int) (300*Admin.proportion),(int) (30*Admin.proportion)), 250, 190);
+		this.location = new TeamDetailLabel("所在地："+"HFDLK", new Dimension((int) (300*Admin.proportion),(int) (30*Admin.proportion)), 0, 250);
+		this.division = new TeamDetailLabel("分区："+"HFDLK", new Dimension((int) (300*Admin.proportion),(int) (30*Admin.proportion)), 250, 250);
+		this.foundyear = new TeamDetailLabel("创建时间："+"HFDLK", new Dimension((int) (300*Admin.proportion),(int) (30*Admin.proportion)), 0, 300);
+		add(this.name);
+		add(this.abbr);
+		add(this.conference);
+		add(this.homecourt);
+		add(this.location);
+		add(this.division);
+		add(this.foundyear);
+		add(teamLogo);
+		
+		//test
+		ControlButton moreData = new ControlButton(new TeamMoreCommand(name), name, new Dimension(100, 20), 250, 300);
+		moreData.setImg(ImgSys.more);
+		add(moreData);
+	}
+
+	
+	private void getTeamInfo(){
+		teamInfo = null;
+	}
+}

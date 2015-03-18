@@ -1,0 +1,33 @@
+package presentation.panel;
+
+import presentation.common.MyJComboBox;
+import presentation.common.Transparent_Panel;
+
+public class PlayerSortPanel extends Transparent_Panel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private MyJComboBox position;
+	private MyJComboBox coalition;
+	private MyJComboBox sortBase;
+
+	public PlayerSortPanel(int width, int height) {
+		super(width, height);
+		position = new MyJComboBox(new String[]{"G","F","C"});
+		coalition = new MyJComboBox(new String[]{"中区","大西洋区","东南区","西北区","太平洋区","西南区"});
+		sortBase = new MyJComboBox(new String[]{"得分","篮板","助攻","得分/篮板/助攻（1：1：1）","盖帽","抢断","犯规","失误","分钟","效率","投篮","三分","罚球","两双"});
+		
+		position.setBounds(0, 0, 100, 20);
+		coalition.setBounds(0, 30, 100, 20);
+		sortBase.setBounds(0, 30, 100, 20);
+		
+		add(position);
+		add(coalition);
+		add(sortBase);
+	}
+	
+	
+}

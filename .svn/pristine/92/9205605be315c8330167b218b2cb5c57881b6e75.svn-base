@@ -1,0 +1,9 @@
+package presentation.common;
+
+public enum PlayerCoalition {
+	CENTRAL,
+	SOUTHEAST,
+	ATLANTIC,
+	SOUTHWEST,
+	PACIFIC
+}

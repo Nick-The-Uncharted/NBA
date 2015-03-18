@@ -1,0 +1,187 @@
+package presentation.table;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+
+import presentation.common.FontList;
+import presentation.common.MyFont;
+import presentation.main.UIController;
+import presentation.panel.PlayerDetailPanel;
+
+public class PlayerTable extends JTable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final int onePageSize = 12;
+
+	private ArrayList<String> players;
+	private int nowLoc = 0;
+	private DefaultTableModel defaultTableModel;
+
+	/**
+	 * JTable一系列的属性设置
+	 * @param width
+	 * @param height
+	 * @param x
+	 * @param y
+	 */
+	public PlayerTable(int width, int height, int x, int y) {
+		setSize(width, height);
+		setLocation(x, y);
+		defaultTableModel = (DefaultTableModel) getModel();
+		setShowGrid(false);
+		setForeground(Color.WHITE);
+		setBorder(null);
+		addMouseListener(getMouseAdapter());
+		setOpaque(false);	//设置透明
+		setBackground(null);	//设置背景
+		setRowHeight(45);	//设置行高
+		setFont(MyFont.getFont(FontList.diebel, 35));	//设置字体
+		setCellSelectionEnabled(true);	//单元格可选中
+		
+		/**
+		 * 设置网格线不显示
+		 */
+		setShowHorizontalLines(false);
+		setShowVerticalLines(false);
+		
+		/**
+		 * 添加球员列表
+		 */
+		setPlayerList(getPlayerList());
+	}
+
+	private void setPlayerList(ArrayList<String> playerList) {
+		this.players = playerList;
+		defaultTableModel.addColumn("first", playerList.toArray());
+		defaultTableModel.addColumn("second", playerList.toArray());
+		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+		renderer.setBackground(null);
+		setCenter();
+	}
+
+	@Override
+	public Component prepareRenderer(TableCellRenderer renderer, int row,
+			int column) {
+		Component c = super.prepareRenderer(renderer, row, column);
+		((JComponent) c).setOpaque(false);
+		((JComponent) c).setBorder(null);
+		return c;
+	}
+
+	private ArrayList<String> getPlayerList() {
+		ArrayList<String> list = new ArrayList<>();
+		list.add("Aaron Brooks");
+//		list.add("2");
+//		list.add("3");
+//		list.add("4");
+//		list.add("5");
+//		list.add("6");
+//		list.add("7");
+//		list.add("8");
+//		list.add("9");
+//		list.add("10");
+//		list.add("11");
+//		list.add("12");
+//		list.add("13");
+//		list.add("14");
+//		list.add("15");
+//		list.add("16");
+		list.add("17");
+		list.add("18");
+		list.add("19");
+		list.add("20");
+		list.add("21");
+		list.add("22");
+		list.add("23");
+		list.add("24");
+		list.add("25");
+		list.add("26");
+		list.add("27");
+		list.add("28");
+		list.add("29");
+		list.add("30");
+		list.add("31");
+		list.add("32");
+		list.add("33");
+		return list;
+	}
+
+	/**
+	 * 下一页
+	 * @return 是否有下一页
+	 */
+	public boolean nextPage() {
+		int sub = players.size() - nowLoc - onePageSize;
+		if (sub > 0) {
+			nowLoc += onePageSize;
+			defaultTableModel = new DefaultTableModel();
+			setModel(defaultTableModel);
+			if (sub < onePageSize/2) {
+				defaultTableModel.addColumn("first", players.subList(nowLoc, players.size()).toArray());
+			}else if (sub <onePageSize) {
+				defaultTableModel.addColumn("first", players.subList(nowLoc, nowLoc + onePageSize/2).toArray());
+				defaultTableModel.addColumn("second", players.subList(nowLoc+onePageSize/2, players.size()).toArray());
+			}else {
+				defaultTableModel.addColumn("first", players.subList(nowLoc, players.size()).toArray());
+				defaultTableModel.addColumn("second", players.subList(nowLoc+onePageSize/2, nowLoc+onePageSize).toArray());
+			}
+			setCenter();
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * 上一页
+	 * @return 是否有上一页
+	 */
+	public boolean lastPage(){
+		int sub = nowLoc - onePageSize;
+		if (sub >= 0) {
+			nowLoc -= onePageSize;
+			defaultTableModel = new DefaultTableModel();
+			setModel(defaultTableModel);
+			defaultTableModel.addColumn("first", players.subList(nowLoc, nowLoc+onePageSize/2).toArray());
+			defaultTableModel.addColumn("second", players.subList(nowLoc+onePageSize/2, nowLoc+onePageSize).toArray());
+			setCenter();
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private void setCenter(){
+		DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+		renderer.setBackground(null);
+		renderer.setHorizontalAlignment(JLabel.CENTER);
+		getColumn("first").setCellRenderer(renderer);
+		getColumn("second").setCellRenderer(renderer);
+	}
+	
+	public MouseAdapter getMouseAdapter() {
+		MouseAdapter mouseAdapter = new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int rowI  = rowAtPoint(e.getPoint());// 得到table的行号
+				int column = columnAtPoint(e.getPoint());//得到table的列号
+				System.out.println("Jkj");
+				UIController.getInstance().addPanel(new PlayerDetailPanel(840, 477, ""+defaultTableModel.getValueAt(rowI, column)),""+defaultTableModel.getValueAt(rowI, column) );
+				UIController.getInstance().jumpTo(""+defaultTableModel.getValueAt(rowI, column));
+			}
+		};
+		return mouseAdapter;
+	}
+}
